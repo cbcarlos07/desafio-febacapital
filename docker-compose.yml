@@ -1,7 +1,11 @@
 version: '3'
 services:
    php-fpm:
-     build: ./php8-fpm
+     build: 
+      args:
+        user: saitam
+        uid: 1000
+      context: ./php8-fpm
      container_name: php8-fpm
      volumes:
        - ./src:/var/www/html
