@@ -25,3 +25,24 @@ No browser http://localhost/info.php e veja o JIT e outras extensões habilitada
 Acessar a ferramenta web para gerenciar o banco de dados no SGBD MySQL, acesse http://localhost:8080 as credencias de acesso, encontra-se no arquivo docker-compose.yml
 
 Feito!
+
+
+# O Desafio
+
+## Para criar o banco de dados
+
+Para criar o banco de dados execute seguinte comando
+
+    CREATE DATABASE db_client;
+
+Para criar as tabelas e o insert inicial de usuários o comando dentro do container
+
+    php yii migrate
+
+O comando para criar usuário é
+
+    php yii create-user/index --username=seuusuario --password=sua-senha --name="Seu Nome"
+
+ou
+
+    php yii create-user/index -u=seuusuario -p=sua-senha -n="Seu Nome"
