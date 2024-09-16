@@ -7,6 +7,7 @@ use yii\rest\Controller;
 use yii\web\Response;
 use app\components\JwtAuth;
 use app\controllers\BaseController;
+use yii\web\NotFoundHttpException;
 
 class ClientController extends BaseController
 {
@@ -19,7 +20,11 @@ class ClientController extends BaseController
 
     public function actionView($id)
     {
-        return Client::findOne($id);
+        $model = Client::findOne($id);
+        if ($model === null) {
+            throw new NotFoundHttpException('O cliente solicitado não foi encontrado.');
+        };
+        return $model;
     }
 
     public function actionCreate()
