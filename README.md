@@ -52,15 +52,17 @@ Para poder testar os outros endpoints
 
 ## Para criar o banco de dados
 
-Para criar o banco de dados execute seguinte comando
+Caso o script automático não execute pode-se executar os seguintes comandos
+
+Para criar o banco de dados execute seguinte comando no container `mysql1`
 
     CREATE DATABASE db_client;
 
-Para criar as tabelas e o insert inicial de usuários o comando dentro do container
+Para criar as tabelas e o insert inicial de usuários o comando dentro do container `php8-fpm`
 
     php yii migrate
 
-Para desfazer um item
+Caso dê problema em algum migrate e queira desfazer Para desfazer um item
 
     php yii migrate/down 1
 
