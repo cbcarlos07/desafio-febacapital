@@ -16,7 +16,7 @@ Após ter instalado o Docker e Docker-compose, segue os procedimentos:
 
 3. Acessar o diretório onde salvou o clone do repositório
 
-4. Execute `docker-compose up -d`
+4. Execute `docker-compose up -d` ou `docker-compose up` para ver os logs
 
 O diretório src do HOST é o volume mapeado no diretório /var/www/html do CONTAINER. Então, é no diretório src que deve salvar os arquivos .php.
 
@@ -25,6 +25,25 @@ No browser http://localhost/info.php e veja o JIT e outras extensões habilitada
 Acessar a ferramenta web para gerenciar o banco de dados no SGBD MySQL, acesse http://localhost:8080 as credencias de acesso, encontra-se no arquivo docker-compose.yml
 
 Feito!
+
+## Script automatizado
+
+Ao executar o comando para subir o docker-compose, por favor espere ao menos de uns 30 segundos a 1 minuto para que a aplicação crie:
+
+1. O banco de dados
+2. Instale as dependências
+4. As tabelas
+5. Faça uns inserts iniciais
+
+## Testes
+
+Para testes de enpoint foi disponilizado o arquivo json do insomnia para testar os endpois
+
+Para testar qualquer endpoint é preciso primeiro chamar o endpoint auth
+
+Para poder testar os outros endpoints
+
+
 
 
 # O Desafio
@@ -38,6 +57,18 @@ Para criar o banco de dados execute seguinte comando
 Para criar as tabelas e o insert inicial de usuários o comando dentro do container
 
     php yii migrate
+
+Para desfazer um item
+
+    php yii migrate/down 1
+
+Para desfazer tudo
+
+    php yii migrate/down all
+
+Ou 
+
+    php yii migrate/down
 
 O comando para criar usuário é
 

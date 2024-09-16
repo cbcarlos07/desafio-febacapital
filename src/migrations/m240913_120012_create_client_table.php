@@ -21,6 +21,7 @@ class m240913_120012_create_client_table extends Migration
             'neighborhood' => $this->string(),
             'city' => $this->string()->notNull(),
             'state' => $this->string(2)->notNull(),
+            'unit' => $this->string(),
             'gender' => $this->char(1)->notNull(),
         ]);
     }

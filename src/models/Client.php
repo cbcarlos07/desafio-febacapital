@@ -19,7 +19,7 @@ class Client extends ActiveRecord
             ['cpf', 'unique'],
             [['name', 'address'], 'string', 'max' => 255],
             ['gender', 'in', 'range' => ['M', 'F']], 
-            [['home_nr', 'neighborhood'], 'string', 'max' => 255],
+            [['home_nr', 'neighborhood', 'unit'], 'string', 'max' => 255],
         ];
     }
 }

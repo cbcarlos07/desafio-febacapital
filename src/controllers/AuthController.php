@@ -13,16 +13,16 @@ use DateTimeImmutable;
 
 class AuthController extends Controller
 {
-    public $enableCsrfValidation = false; // Desabilita CSRF para APIs
+    public $enableCsrfValidation = false; 
 
    
 
     public function actionLogin()
     {
-        Yii::$app->response->format = Response::FORMAT_JSON; // Retorna JSON
+        Yii::$app->response->format = Response::FORMAT_JSON; 
         $request = Yii::$app->request;
         
-        if ($request->isPost) 
+        if ($request->isPatch) 
         {
             $username = $request->post('username');
             $password = $request->post('password');

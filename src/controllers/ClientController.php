@@ -6,23 +6,11 @@ use app\models\Client;
 use yii\rest\Controller;
 use yii\web\Response;
 use app\components\JwtAuth;
+use app\controllers\BaseController;
 
-class ClientController extends Controller
+class ClientController extends BaseController
 {
-    public function behaviors()
-    {
-        return [
-            'authenticator' => [
-                'class' => JwtAuth::class,
-            ],
-            'contentNegotiator' => [
-                'class' => \yii\filters\ContentNegotiator::class,
-                'formats' => [
-                    'application/json' => Response::FORMAT_JSON,
-                ],
-            ],
-        ];
-    }
+    
 
     public function actionIndex()
     {
@@ -70,45 +58,29 @@ class ClientController extends Controller
     }
 
     public function actionPaginate() {
-       // Obter parâmetros da requisição
-       $request = Yii::$app->request->post(); // Usamos post, pois estamos usando PATCH
-       $pagina = isset($request['pagina']) ? (int)$request['pagina'] : 1; // Página atual (default: 1)
-       $ordenar = isset($request['ordenar']) ? $request['ordenar'] : 'name'; // Campo para ordenar (default: 'name')
-       $filtro = isset($request['filtro']) ? $request['filtro'] : ''; // Filtro a ser aplicado
+       
+       $request = Yii::$app->request->post(); 
+       $pagina = isset($request['pagina']) ? (int)$request['pagina'] : 1; 
+       $ordenar = isset($request['ordenar']) ? $request['ordenar'] : 'name'; 
+       $filtro = isset($request['filtro']) ? $request['filtro'] : false; 
+       $limite = isset($request['limite']) ? $request['limite'] : 10;
+       $camposOrdenar = ['name', 'cpf', 'city'];
 
-       // Definir a quantidade de registros por página
-       $limite = 10; // Você pode ajustar isso conforme necessário
-       $offset = ($pagina - 1) * $limite;
-
-       // Criar a consulta
-       $query = Client::find();
-
-       // Aplicar filtro se fornecido
-       if ($filtro) {
-           $query->orFilterWhere(['like', 'name', $filtro])
-                 ->orFilterWhere(['cpf' => $filtro]);
+       $filter = false;
+       if( $filtro ){
+           $filter = [
+            ['like', 'name', $filtro],
+            ['cpf' => $filtro]
+           ];
        }
-
-       // Contar o total de registros após o filtro
-       $totalRegistros = $query->count();
-
-       // Ordenar a consulta
-       if (in_array($ordenar, ['name', 'cpf', 'city'])) {
-           $query->orderBy([$ordenar => SORT_ASC]); // Ordenar por campo especificado
-       }
-
-       // Aplicar limite e offset
-       $clientes = $query->limit($limite)->offset($offset)->all();
-
-       // Calcular total de páginas
-       $totalPaginas = ceil($totalRegistros / $limite);
-
-       // Retornar resposta
-       return [
-           'pagina' => $pagina,
-           'total' => $totalRegistros,
-           'totalPagina' => $totalPaginas,
-           'dados' => $clientes,
+       $params = [
+        'pagina' => $pagina,
+        'ordenar' => $ordenar,
+        'filtro' => $filter,
+        'limite' => $limite,
+        'camposOrdenar' => $camposOrdenar
        ];
+
+       return $this->pagination($params, Client::find());
     }
 }

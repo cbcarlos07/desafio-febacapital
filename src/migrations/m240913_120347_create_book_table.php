@@ -14,11 +14,11 @@ class m240913_120347_create_book_table extends Migration
     {
         $this->createTable('{{%book}}', [
             'id' => $this->primaryKey(),
-            'isbn' => $this->integer()->notNull(),
-            'title' => $this->string(11)->notNull()->unique(),
+            'isbn' => $this->string(14)->notNull(),
+            'title' => $this->string()->notNull()->unique(),
             'author' => $this->string()->notNull(),
-            'price' => $this->integer(),
-            'inventory' => $this->decimal(10, 2)
+            'price' => $this->decimal(10, 2),
+            'inventory' => $this->integer()
         ]);
     }
 

@@ -10,6 +10,8 @@ services:
        - ./src:/var/www/html
        - ./php8-fpm/config/jit.ini:/usr/local/etc/php/conf.d/jit.ini
        - ./php8-fpm/config/timezone.ini:/usr/local/etc/php/conf.d/timezone.ini
+     depends_on:
+      - db
 
    nginx:
      build: ./nginx
@@ -42,9 +44,3 @@ services:
      ports:
        - 8080:80
      
-networks:
-  default:
-    external: true
-    name: mysql-network
-
-

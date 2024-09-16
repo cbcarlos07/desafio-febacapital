@@ -58,13 +58,15 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => true, 
             'rules' => [
-                'POST auth' => 'auth/login',
+                'PATCH auth' => 'auth/login',
                 'cliente' => 'client/index',    
                 'cliente/<id:\d+>' => 'client/view',  
                 'cliente/criar' => 'client/create',   
                 'cliente/atualizar/<id:\d+>' => 'client/update',  
                 'cliente/deletar/<id:\d+>' => 'client/delete',
-                'cliente/paginate' => 'client/paginate'
+                'cliente/paginate' => 'client/paginate',
+                'livro' => 'book/index',
+                'livro/paginate' => 'book/paginate',
             ],
         ],
          
