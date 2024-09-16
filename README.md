@@ -37,11 +37,13 @@ Ao executar o comando para subir o docker-compose, por favor espere ao menos de 
 
 ## Testes
 
-Para testes de enpoint foi disponilizado o arquivo json do insomnia para testar os endpois
+Para testes de enpoint foi disponilizado o arquivo json ([Insomnia_2024-09-16.json](https://github.com/cbcarlos07/desafio-febacapital/blob/main/Insomnia_2024-09-16.json)) do insomnia para testar os endpois
 
 Para testar qualquer endpoint é preciso primeiro chamar o endpoint auth
 
 Para poder testar os outros endpoints
+
+![print](https://github.com/cbcarlos07/desafio-febacapital/blob/main/prints/Screenshot_1.png)
 
 
 
